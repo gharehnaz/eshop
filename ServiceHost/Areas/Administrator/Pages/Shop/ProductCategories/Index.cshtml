@@ -1,0 +1,75 @@
+﻿  @page
+@model ServiceHost.Areas.Administrator.Pages.Shop.ProductCategories.IndexModel
+@{
+
+}
+@{
+    Layout = "Shared/_AdminLayout";
+}
+@section Css{
+         
+    <link rel="stylesheet" href="~/Admin Theme/assets/jquery-datatables-editable/datatables.css">
+} 
+<div class="row">
+    <div class="col-sm-12">
+        <p class="pull-left">
+            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">Create Product Categories</a>
+        </p>
+    </div>
+</div>
+ <div class="panel">                           
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="m-b-30">
+                    <button id="addToTable" class="btn btn-primary waves-effect waves-light">Add <i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped" id="datatable-editable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>CreationDate</th>
+                    <th>Edit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ProductCategories)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        <img src="~/ProductPictures/@item.Picture" style="width: 70px; height: 70px" />
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.CreationDate</td>
+                    <td>
+                        <a class="btn btn-warning pull-right m-rl-5" 
+                            href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id})">
+                            <i class="fa fa-edit"></i> Edit
+                        </a>
+                    </td>
+                </tr>
+            }    
+            </tbody>
+        </table>
+    </div>
+<!-- end: page -->
+</div> <!-- end Panel -->
+
+@section Scripts{
+    
+    <script src="~/Admin Theme/assets/magnific-popup/magnific-popup.js"></script>
+    <script src="~/Admin Theme/assets/jquery-datatables-editable/jquery.dataTables.js"></script>
+    <script src="~/Admin Theme/assets/datatables/dataTables.bootstrap.js"></script>
+     <script src="~/Admin Theme/assets/jquery-datatables-editable/datatables.editable.init.js"></script>
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datatable').dataTable();
+        });
+    </script>
+}                       
